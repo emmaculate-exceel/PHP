@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinook Album Manager — User Documentation</title>
+    <style>
+        /* ── Variables ─────────────────────────────────────── */
+        :root {
+            --primary: #1d4ed8;
+            --text: #1a1d23;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --surface: #ffffff;
+            --bg: #f4f5f7;
+            --code-bg: #1e293b;
+            --code-text: #e2e8f0;
+            --success: #065f46;
+            --success-bg: #ecfdf5;
+            --tip-bg: #eff6ff;
+            --tip-border: #bfdbfe;
+            --warn-bg: #fffbeb;
+            --warn-border: #fcd34d;
+            --warn-text: #92400e;
+            --radius: 8px;
+            --max: 900px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+        }
+
+        /* ── Layout ────────────────────────────────────────── */
+        .doc-wrapper {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* ── Cover ─────────────────────────────────────────── */
+        .cover {
+            background: #0f172a;
+            color: #f1f5f9;
+            text-align: center;
+            padding: 4rem 2rem 3.5rem;
+            border-radius: var(--radius);
+            margin-bottom: 2.5rem;
+        }
+        .cover-icon { font-size: 3.5rem; margin-bottom: 1rem; display: block; }
+        .cover h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -.04em; }
+        .cover h1 em { color: #60a5fa; font-style: normal; }
+        .cover .cover-sub { color: #94a3b8; margin-top: .5rem; font-size: 1rem; }
+        .cover-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.75rem;
+            flex-wrap: wrap;
+            font-size: .85rem;
+            color: #64748b;
+        }
+        .cover-meta span strong { color: #cbd5e1; }
+
+        /* ── Table of contents ──────────────────────────────── */
+        .toc {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem 1.75rem;
+            margin-bottom: 2.5rem;
+        }
+        .toc h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 1rem; }
+        .toc ol { padding-left: 1.25rem; }
+        .toc li { margin-bottom: .35rem; }
+        .toc a { color: var(--primary); font-size: .9rem; }
+
+        /* ── Sections ───────────────────────────────────────── */
+        .doc-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem 2.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-badge {
+            display: inline-block;
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--primary);
+            background: #dbeafe;
+            padding: .2rem .55rem;
+            border-radius: 4px;
+            margin-bottom: .5rem;
+        }
+        .doc-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: .75rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .doc-section h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin: 1.5rem 0 .5rem;
+            color: var(--text);
+        }
+        .doc-section p { margin-bottom: .9rem; font-size: .95rem; }
+        .doc-section ul, .doc-section ol {
+            padding-left: 1.4rem;
+            margin-bottom: 1rem;
+            font-size: .95rem;
+        }
+        .doc-section li { margin-bottom: .3rem; }
+
+        /* ── Callout boxes ──────────────────────────────────── */
+        .callout {
+            padding: .875rem 1.15rem;
+            border-radius: var(--radius);
+            border-left: 4px solid;
+            margin: 1.1rem 0;
+            font-size: .9rem;
+        }
+        .callout--tip {
+            background: var(--tip-bg);
+            border-color: var(--primary);
+            color: #1e3a8a;
+        }
+        .callout--warn {
+            background: var(--warn-bg);
+            border-color: var(--warn-border);
+            color: var(--warn-text);
+        }
+        .callout--success {
+            background: var(--success-bg);
+            border-color: #6ee7b7;
+            color: var(--success);
+        }
+        .callout strong { display: block; margin-bottom: .25rem; }
+
+        /* ── Code blocks ────────────────────────────────────── */
+        pre {
+            background: var(--code-bg);
+            color: var(--code-text);
+            border-radius: var(--radius);
+            padding: 1.1rem 1.25rem;
+            overflow-x: auto;
+            font-size: .85rem;
+            margin: 1rem 0;
+            font-family: 'Cascadia Code', 'Fira Code', monospace;
+            line-height: 1.6;
+        }
+        code {
+            font-family: 'Cascadia Code', 'Fira Code', monospace;
+            background: #e5e7eb;
+            color: #111827;
+            padding: .1em .35em;
+            border-radius: 3px;
+            font-size: .87em;
+        }
+        pre code { background: none; color: inherit; padding: 0; }
+
+        /* ── Step boxes ─────────────────────────────────────── */
+        .steps { counter-reset: step; }
+        .step {
+            display: grid;
+            grid-template-columns: 36px 1fr;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            align-items: start;
+        }
+        .step-num {
+            counter-increment: step;
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: .875rem;
+            flex-shrink: 0;
+            margin-top: .15rem;
+        }
+        .step-body h4 { font-weight: 600; margin-bottom: .3rem; }
+        .step-body p  { font-size: .9rem; color: var(--muted); margin-bottom: 0; }
+
+        /* ── Feature cards ──────────────────────────────────── */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .feature-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.1rem;
+        }
+        .feature-card .fc-icon { font-size: 1.5rem; margin-bottom: .4rem; display: block; }
+        .feature-card h4 { font-size: .9rem; font-weight: 700; margin-bottom: .3rem; }
+        .feature-card p { font-size: .82rem; color: var(--muted); margin: 0; }
+
+        /* ── Screenshot placeholders ────────────────────────── */
+        .screenshot {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            padding: 2.5rem 1rem;
+            text-align: center;
+            color: var(--muted);
+            font-size: .85rem;
+            margin: 1rem 0;
+            background: #f9fafb;
+        }
+        .screenshot span { display: block; font-size: 1.8rem; margin-bottom: .4rem; }
+
+        /* ── Table ──────────────────────────────────────────── */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .88rem;
+            margin: 1rem 0;
+        }
+        .info-table th {
+            background: #f3f4f6;
+            padding: .6rem .9rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+        .info-table td {
+            padding: .65rem .9rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .info-table tr:last-child td { border-bottom: none; }
+
+        /* ── Footer ─────────────────────────────────────────── */
+        .doc-footer {
+            text-align: center;
+            color: var(--muted);
+            font-size: .8rem;
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 600px) {
+            .cover h1 { font-size: 1.5rem; }
+            .doc-section { padding: 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="doc-wrapper">
+
+    <!-- ── Cover ──────────────────────────────────────────────────────── -->
+    <div class="cover">
+        <span class="cover-icon">♬</span>
+        <h1>Chinook <em>Album Manager</em></h1>
+        <p class="cover-sub">User Documentation &mdash; Internal Employee Guide</p>
+        <div class="cover-meta">
+            <span><strong>Version:</strong> 1.0</span>
+            <span><strong>Audience:</strong> Chinook Employees</span>
+            <span><strong>Application:</strong> Web-based (PHP/MySQL)</span>
+        </div>
+    </div>
+
+    <!-- ── Table of Contents ──────────────────────────────────────────── -->
+    <div class="toc">
+        <h2>Contents</h2>
+        <ol>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#getting-started">Getting Started</a></li>
+            <li><a href="#features">Features &amp; Functionality</a></li>
+            <li><a href="#instructions">Step-by-Step Instructions</a></li>
+        </ol>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SECTION 1 — INTRODUCTION
+    ══════════════════════════════════════════════════════════════════ -->
+    <div class="doc-section" id="introduction">
+        <span class="section-badge">Section 1</span>
+        <h2>Introduction</h2>
+
+        <h3>What is the Chinook Album Manager?</h3>
+        <p>
+            The <strong>Chinook Album Manager</strong> is an internal web-based application designed
+            for Chinook Music employees. It provides a simple, browser-based interface for managing
+            the company's music catalogue — allowing staff to view, add, edit, and delete album
+            records along with their associated artists and tracks.
+        </p>
+        <p>
+            All data is stored securely in the company's MySQL database. No specialist software
+            or installation is required on your computer — you only need a web browser.
+        </p>
+
+        <h3>Goal</h3>
+        <p>
+            To centralise and simplify catalogue management, reducing reliance on manual
+            spreadsheets and ensuring all employees are working from a single, up-to-date source
+            of truth.
+        </p>
+
+        <h3>Target Audience</h3>
+        <p>
+            This documentation is written for <strong>Chinook employees</strong> who need to
+            maintain the music catalogue. No technical knowledge is required to use the application.
+        </p>
+
+        <h3>Key Terms</h3>
+        <table class="info-table">
+            <thead>
+                <tr>
+                    <th>Term</th>
+                    <th>Definition</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Album</strong></td><td>A collection of music tracks released together, attributed to an artist.</td></tr>
+                <tr><td><strong>Artist</strong></td><td>The performer or group associated with one or more albums.</td></tr>
+                <tr><td><strong>Track</strong></td><td>An individual song or piece of music that belongs to an album.</td></tr>
+                <tr><td><strong>CRUD</strong></td><td>Create, Read, Update, Delete — the four core data management operations supported by this application.</td></tr>
+                <tr><td><strong>Flash message</strong></td><td>A temporary notification shown at the top of the page after an action (e.g. "Album saved successfully").</td></tr>
+            </tbody>
+        </table>
+
+        <h3>System Requirements</h3>
+        <table class="info-table">
+            <thead>
+                <tr><th>Component</th><th>Requirement</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Web browser</td><td>Any modern browser: Chrome, Firefox, Edge, Safari (latest two versions)</td></tr>
+                <tr><td>JavaScript</td><td>Must be enabled (used for delete confirmation and dynamic track rows)</td></tr>
+                <tr><td>Network</td><td>Access to the Chinook internal server or localhost (for development)</td></tr>
+                <tr><td>Screen size</td><td>Works on desktop and tablet; mobile supported with reduced layout</td></tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout--tip">
+            <strong>💡 Tip</strong>
+            You do not need to install anything on your computer. Simply open your web browser and
+            navigate to the application URL provided by your system administrator.
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SECTION 2 — GETTING STARTED
+    ══════════════════════════════════════════════════════════════════ -->
+    <div class="doc-section" id="getting-started">
+        <span class="section-badge">Section 2</span>
+        <h2>Getting Started</h2>
+
+        <h3>For End Users (Employees)</h3>
+        <p>
+            If your system administrator has already set up the application on your company
+            server, you only need to open your browser and go to the URL provided.
+        </p>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h4>Open your browser</h4>
+                    <p>Launch Chrome, Firefox, Edge, or Safari on your computer.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h4>Navigate to the application</h4>
+                    <p>Type the URL into the address bar, e.g. <code>http://yourserver/chinook/</code> (your administrator will provide the exact address).</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <h4>You're in!</h4>
+                    <p>The Album Library page loads automatically — no login is required for internal use.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>For Developers / Local Setup</h3>
+        <p>Follow these steps to run the application on a local development machine:</p>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h4>Install a local server stack</h4>
+                    <p>Install <strong>XAMPP</strong> (Windows/Mac/Linux) or <strong>WAMP</strong> (Windows). These bundle Apache, PHP 8+, and MySQL together.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h4>Copy the application files</h4>
+                    <p>Place the <code>chinook/</code> folder inside your server's web root directory. For XAMPP, this is <code>C:\xampp\htdocs\</code>.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <h4>Set up the database</h4>
+                    <p>Open phpMyAdmin (<code>http://localhost/phpmyadmin</code>), create a database named <code>chinook</code>, then import <code>chinook_setup.sql</code> from the application folder. Alternatively, import the full official Chinook dataset.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-body">
+                    <h4>Configure database credentials</h4>
+                    <p>Open <code>includes/db.php</code> in a text editor and update <code>DB_USER</code> and <code>DB_PASS</code> to match your MySQL login.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">5</div>
+                <div class="step-body">
+                    <h4>Open the application</h4>
+                    <p>In your browser, go to <code>http://localhost/chinook/</code>. The Album Library page should appear.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout--warn">
+            <strong>⚠️ Important</strong>
+            Never share your database credentials or leave <code>db.php</code> publicly accessible.
+            This application is intended for use within a trusted internal network.
+        </div>
+
+        <h3>Basic Navigation</h3>
+        <p>The application has a persistent header bar at the top of every page with two links:</p>
+        <ul>
+            <li><strong>All Albums</strong> — Returns to the main album listing page at any time.</li>
+            <li><strong>+ New Album</strong> — Opens the form to add a new album.</li>
+        </ul>
+        <p>The current page is highlighted in the navigation bar so you always know where you are.</p>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SECTION 3 — FEATURES & FUNCTIONALITY
+    ══════════════════════════════════════════════════════════════════ -->
+    <div class="doc-section" id="features">
+        <span class="section-badge">Section 3</span>
+        <h2>Features &amp; Functionality</h2>
+
+        <p>The Chinook Album Manager provides four core operations, plus a search feature:</p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <span class="fc-icon">📋</span>
+                <h4>View Albums</h4>
+                <p>Browse the full album catalogue with artist names and track counts. Click <em>View</em> for full track details.</p>
+            </div>
+            <div class="feature-card">
+                <span class="fc-icon">➕</span>
+                <h4>Add Album</h4>
+                <p>Create a new album, assign an existing or brand-new artist, and add tracks — all in one form.</p>
+            </div>
+            <div class="feature-card">
+                <span class="fc-icon">✏️</span>
+                <h4>Edit Album</h4>
+                <p>Update album title, reassign the artist, edit track details, add new tracks, or mark tracks for deletion.</p>
+            </div>
+            <div class="feature-card">
+                <span class="fc-icon">🗑️</span>
+                <h4>Delete Album</h4>
+                <p>Permanently remove an album and all its associated tracks after confirming a safety prompt.</p>
+            </div>
+            <div class="feature-card">
+                <span class="fc-icon">🔍</span>
+                <h4>Search</h4>
+                <p>Filter the album list by album title or artist name in real time.</p>
+            </div>
+            <div class="feature-card">
+                <span class="fc-icon">🔔</span>
+                <h4>Notifications</h4>
+                <p>Colour-coded flash messages confirm success or report errors after every action.</p>
+            </div>
+        </div>
+
+        <h3>The Album List (index.php)</h3>
+        <p>
+            This is the home page of the application. It displays a table of all albums, showing
+            the album ID, title, artist name, and the number of tracks. From here you can:
+        </p>
+        <ul>
+            <li>Use the <strong>search bar</strong> to filter by album title or artist name.</li>
+            <li>Click <strong>View</strong> to see all tracks for an album.</li>
+            <li>Click <strong>Edit</strong> to modify an album.</li>
+            <li>Click <strong>Delete</strong> to remove an album (a confirmation dialog appears first).</li>
+        </ul>
+
+        <h3>Album Detail View (view.php)</h3>
+        <p>
+            Displays all metadata for a single album alongside a full track listing including
+            track name, composer, duration, file size, and price. An <strong>Edit Album</strong>
+            button is provided at the top.
+        </p>
+
+        <h3>Create Album Form (create.php)</h3>
+        <p>
+            A structured form split into three sections: <em>Album Details</em>, <em>Artist</em>,
+            and <em>Tracks</em>. You can choose to assign an existing artist from a dropdown or
+            add a completely new artist. Tracks can be added dynamically using the
+            <strong>+ Add Another Track</strong> button — as many as needed.
+        </p>
+
+        <h3>Edit Album Form (edit.php)</h3>
+        <p>
+            Identical layout to the create form but pre-populated with the current data.
+            Existing tracks are shown with a <em>Mark for deletion</em> checkbox. Ticking it
+            dims the row and signals to the application to remove it when you save.
+            New tracks can also be added at the bottom.
+        </p>
+
+        <h3>Delete Confirmation Modal</h3>
+        <p>
+            Clicking <strong>Delete</strong> on the album list does not immediately delete anything.
+            A modal dialog appears showing the album name and a warning that all tracks will also
+            be permanently removed. You must click <strong>Yes, Delete</strong> to confirm, or
+            <strong>Cancel</strong> to return safely.
+        </p>
+
+        <div class="callout callout--warn">
+            <strong>⚠️ Deletion is permanent</strong>
+            Once an album is deleted, neither the album record nor its tracks can be recovered
+            through the application. Always double-check the album name in the confirmation dialog.
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SECTION 4 — STEP-BY-STEP INSTRUCTIONS
+    ══════════════════════════════════════════════════════════════════ -->
+    <div class="doc-section" id="instructions">
+        <span class="section-badge">Section 4</span>
+        <h2>Step-by-Step Instructions</h2>
+
+        <!-- 4.1 View -->
+        <h3>4.1 — Viewing All Albums</h3>
+        <div class="screenshot"><span>🖼️</span>Screenshot: Album Library table (index.php)</div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h4>Open the application</h4>
+                    <p>Navigate to the application URL. The <em>Album Library</em> page loads automatically showing all albums.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h4>Browse the table</h4>
+                    <p>Scroll through the list. Each row shows the Album ID, Title, Artist, and number of tracks.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <h4>Search (optional)</h4>
+                    <p>Type a keyword into the search box and click <strong>Search</strong>. The table updates to show matching albums. Click <strong>Clear</strong> to reset.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-body">
+                    <h4>View full details</h4>
+                    <p>Click the <strong>View</strong> button on any row to open the album's detail page, including its full track listing.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4.2 Create -->
+        <h3>4.2 — Adding a New Album</h3>
+        <div class="screenshot"><span>🖼️</span>Screenshot: New Album form (create.php)</div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h4>Open the New Album form</h4>
+                    <p>Click <strong>+ New Album</strong> in the top navigation bar.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h4>Enter the album title</h4>
+                    <p>Type the album title into the <em>Album Title</em> field. This field is required.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <h4>Choose an artist</h4>
+                    <p>Select <em>Use an existing artist</em> and pick from the dropdown, <strong>or</strong> select <em>Add a new artist</em> and type the new artist's name.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-body">
+                    <h4>Add tracks (optional)</h4>
+                    <p>Fill in the pre-existing track row, or click <strong>+ Add Another Track</strong> to add more rows. Each track requires a name; all other fields are optional.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">5</div>
+                <div class="step-body">
+                    <h4>Submit the form</h4>
+                    <p>Click <strong>Create Album</strong>. If any required fields are missing, error messages will appear — correct them and try again. On success, you are taken to the new album's detail page.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout--success">
+            <strong>✅ Success</strong>
+            A green banner reading "Album created successfully" confirms the album was saved.
+        </div>
+
+        <!-- 4.3 Edit -->
+        <h3>4.3 — Editing an Album</h3>
+        <div class="screenshot"><span>🖼️</span>Screenshot: Edit Album form (edit.php)</div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h4>Find the album</h4>
+                    <p>On the Album Library page, locate the album you want to change. Use the search bar if needed.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h4>Open the Edit form</h4>
+                    <p>Click the <strong>Edit</strong> button on that album's row, or click <strong>Edit Album</strong> from the album's detail page.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <h4>Make your changes</h4>
+                    <p>Update the album title, reassign the artist, edit any track fields, mark tracks for deletion by ticking their checkbox, or add new tracks at the bottom.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-body">
+                    <h4>Save</h4>
+                    <p>Click <strong>Save Changes</strong>. Validation errors will be displayed inline if something is missing. On success you are redirected to the album's detail page.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout--tip">
+            <strong>💡 Tip — Deleting individual tracks</strong>
+            To remove a specific track from an album without deleting the whole album,
+            tick its <em>Mark for deletion</em> checkbox in the Edit form and click Save Changes.
+        </div>
+
+        <!-- 4.4 Delete -->
+        <h3>4.4 — Deleting an Album</h3>
+        <div class="screenshot"><span>🖼️</span>Screenshot: Delete confirmation modal</div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h4>Locate the album</h4>
+                    <p>Find the album on the Album Library page.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h4>Click Delete</h4>
+                    <p>Click the red <strong>Delete</strong> button on that album's row. A confirmation dialog appears.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <h4>Read the warning</h4>
+                    <p>The dialog shows the album name and warns you that all its tracks will also be deleted.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-body">
+                    <h4>Confirm or cancel</h4>
+                    <p>Click <strong>Yes, Delete</strong> to proceed permanently. Click <strong>Cancel</strong> (or press Escape) to go back without making any changes.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout--warn">
+            <strong>⚠️ No undo</strong>
+            Deleted albums and tracks cannot be recovered through the application.
+            If you delete something by mistake, contact your system administrator to restore from a database backup.
+        </div>
+
+        <!-- 4.5 Troubleshooting -->
+        <h3>4.5 — Common Issues &amp; Troubleshooting</h3>
+        <table class="info-table">
+            <thead>
+                <tr><th>Problem</th><th>Likely Cause</th><th>Solution</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Blank page or "Database connection failed"</td>
+                    <td>Incorrect database credentials or MySQL server not running</td>
+                    <td>Check <code>includes/db.php</code> credentials; ensure MySQL is running in XAMPP/WAMP</td>
+                </tr>
+                <tr>
+                    <td>Form says "Album title is required" even though I filled it in</td>
+                    <td>Leading/trailing spaces only, or browser auto-fill issue</td>
+                    <td>Re-type the title manually</td>
+                </tr>
+                <tr>
+                    <td>"+ Add Another Track" button does nothing</td>
+                    <td>JavaScript is disabled in the browser</td>
+                    <td>Enable JavaScript in browser settings and reload</td>
+                </tr>
+                <tr>
+                    <td>Page not found (404)</td>
+                    <td>Application files not in the correct folder</td>
+                    <td>Ensure the <code>chinook/</code> folder is inside the web root (<code>htdocs/</code>)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="doc-footer">
+        <p>Chinook Album Manager &mdash; User Documentation v1.0 &mdash; Internal Use Only</p>
+        <p style="margin-top:.3rem;">For technical support, contact your system administrator.</p>
+    </div>
+
+</div><!-- /.doc-wrapper -->
+</body>
+</html>
