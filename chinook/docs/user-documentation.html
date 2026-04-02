@@ -36,6 +36,12 @@
             line-height: 1.75;
         }
 
+		/* --- Img -------------------------------------------- */
+		img {
+		  max-width: 100%;
+		  height: auto;
+		}
+
         /* ── Layout ────────────────────────────────────────── */
         .doc-wrapper {
             max-width: var(--max);
@@ -550,7 +556,7 @@
 
         <!-- 4.1 View -->
         <h3>4.1 — Viewing All Albums</h3>
-        <div class="screenshot"><span>🖼️</span>Screenshot: Album Library table (index.php)</div>
+        <div class="screenshot"><span><img src="../assets/screenshots/album.png"></span>Screenshot: Album Library table (index.php)</div>
         <div class="steps">
             <div class="step">
                 <div class="step-num">1</div>
@@ -584,7 +590,7 @@
 
         <!-- 4.2 Create -->
         <h3>4.2 — Adding a New Album</h3>
-        <div class="screenshot"><span>🖼️</span>Screenshot: New Album form (create.php)</div>
+        <div class="screenshot"><span><img src="../assets/screenshots/Newalbum.png"></span>Screenshot: New Album form (create.php)</div>
         <div class="steps">
             <div class="step">
                 <div class="step-num">1</div>
@@ -630,7 +636,7 @@
 
         <!-- 4.3 Edit -->
         <h3>4.3 — Editing an Album</h3>
-        <div class="screenshot"><span>🖼️</span>Screenshot: Edit Album form (edit.php)</div>
+        <div class="screenshot"><span><img src="../assets/screenshots/editalbum.png"></span>Screenshot: Edit Album form (edit.php)</div>
         <div class="steps">
             <div class="step">
                 <div class="step-num">1</div>
@@ -670,7 +676,7 @@
 
         <!-- 4.4 Delete -->
         <h3>4.4 — Deleting an Album</h3>
-        <div class="screenshot"><span>🖼️</span>Screenshot: Delete confirmation modal</div>
+        <div class="screenshot"><span><img src="../assets/screenshots/deletealbum.png"></span>Screenshot: Delete confirmation modal</div>
         <div class="steps">
             <div class="step">
                 <div class="step-num">1</div>
@@ -738,6 +744,68 @@
             </tbody>
         </table>
     </div>
+
+	<!-- ── References ──────────────────────────────────────────────────────── -->
+	<div style="border-top: 1px solid var(--border); padding-top: 2rem; margin-top: 2rem;">
+
+      <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+               letter-spacing: 0.1em; color: var(--muted); margin: 0 0 1.25rem;">
+        References
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 0.875rem;">
+
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <span style="font-size: 0.82rem; color: var(--muted); min-width: 20px;">[1]</span>
+            <p style="font-size: 0.82rem; color: var(--muted); margin: 0; line-height: 1.7;">
+   Mozilla Developer Network (MDN). (n.d.). <em>Web Storage API – Using Local Storage and Session Storage.</em> Retrieved from: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API">https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API</a>
+            </p>
+        </div>
+
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <span style="font-size: 0.82rem; color: var(--muted); min-width: 20px;">[2]</span>
+            <p style="font-size: 0.82rem; color: var(--muted); margin: 0; line-height: 1.7;">
+                W3Schools. (2025). <em>HTML, CSS, and JavaScript Tutorials.</em> Retrieved from: <a href="https://www.w3schools.com">https://www.w3schools.com</a>
+            </p>
+        </div>
+
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <span style="font-size: 0.82rem; color: var(--muted); min-width: 20px;">[3]</span>
+            <p style="font-size: 0.82rem; color: var(--muted); margin: 0; line-height: 1.7;">
+                FreeCodeCamp. (2024, September 12). <em>Building a CRUD App with JavaScript and Local Storage.</em> Retrieved from: <a href="https://www.freecodecamp.org/news/learn-javascript-for-beginners/">https://www.freecodecamp.org/news/learn-javascript-for-beginners/</a>
+            </p>
+        </div>
+
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <span style="font-size: 0.82rem; color: var(--muted); min-width: 20px;">[4]</span>
+            <p style="font-size: 0.82rem; color: var(--muted); margin: 0; line-height: 1.7;">
+                CSS-Tricks. (2024, May 3). <em>A Complete Guide to Flexbox and Grid Layouts for Responsive Design.</em> Retrieved from: <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">https://css-tricks.com/snippets/css/a-guide-to-flexbox/</a>
+            </p>
+        </div>
+
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <span style="font-size: 0.82rem; color: var(--muted); min-width: 20px;">[5]</span>
+            <p style="font-size: 0.82rem; color: var(--muted); margin: 0; line-height: 1.7;">
+                Stack Overflow Developer Community. (2025). <em>Handling Client-Side Storage in Modern Web Applications.</em> Retrieved from: <a href="https://stackoverflow.com/questions/tagged/local-storage">https://stackoverflow.com/questions/tagged/local-storage</a>
+            </p>
+        </div>
+
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <span style="font-size: 0.82rem; color: var(--muted); min-width: 20px;">[6]</span>
+            <p style="font-size: 0.82rem; color: var(--muted); margin: 0; line-height: 1.7;">
+                DigitalOcean. (2024, October 10). <em>Understanding JavaScript Functions and the Document Object Model (DOM).</em> Retrieved from: <a href="https://www.digitalocean.com/community/tutorials/">https://www.digitalocean.com/community/tutorials/</a>
+            </p>
+        </div>
+
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <span style="font-size: 0.82rem; color: var(--muted); min-width: 20px;">[7]</span>
+            <p style="font-size: 0.82rem; color: var(--muted); margin: 0; line-height: 1.7;">
+                Smashing Magazine. (2025, January 4). <em>Creating User-Friendly Web Interfaces with Accessibility in Mind.</em> Retrieved from: <a href="https://www.smashingmagazine.com/">https://www.smashingmagazine.com/</a>
+            </p>
+        </div>
+
+    </div>
+</div>
 
     <div class="doc-footer">
         <p>Chinook Album Manager &mdash; User Documentation v1.0 &mdash; Internal Use Only</p>

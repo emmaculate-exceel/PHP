@@ -1,5 +1,5 @@
-define('DB_USER', 'root');
-define('DB_PASS', 'your_password_here');
+define('DB_USER', 'chinook_user');
+define('DB_PASS', 'root');
 ```
 Save with **Ctrl+O**, then **Ctrl+X** to exit.
 
